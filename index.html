@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Verbania Mood</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #0056b3;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #response {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Benvenuti all'API sul Mood di Verbania</h1>
+
+        <h2>La Città di Verbania</h2>
+        <p>Verbania è una pittoresca città situata sulle rive del Lago Maggiore, in Piemonte. È capoluogo della
+            provincia del Verbano-Cusio-Ossola e offre panorami mozzafiato, giardini lussureggianti come quelli di Villa
+            Taranto e un'atmosfera rilassante. Nonostante la sua bellezza, questa API riflette un umore un po'
+            particolare...</p>
+
+        <h2>Come usare l'API</h2>
+        <p>Questa API ha un solo endpoint che descrive l'umore attuale (che, spoiler: non è dei migliori).</p>
+        <ul>
+            <li><strong>Endpoint:</strong> <code>/v1/mood/</code></li>
+            <li><strong>Metodo:</strong> <code>GET</code></li>
+            <li><strong>Risposta:</strong> Testo semplice che indica l'umore.</li>
+        </ul>
+
+        <h3>Testa l'Endpoint</h3>
+        <p>Clicca il pulsante qui sotto per interrogare l'endpoint <code>/v1/mood/</code> e vedere come va oggi
+            (probabilmente male, come sempre).</p>
+        <button id="prova">Come va?</button>
+        <div id="responseArea">
+            <strong>Risposta dall'API:</strong> <span id="apiResponse"></span>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('prova').addEventListener('click', function () {
+            fetch('/v1/mood/')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('apiResponse').textContent = data;
+                })
+                .catch(error => {
+                    console.error('Errore nella chiamata API:', error);
+                    document.getElementById('apiResponse').textContent = "Errore nel contattare l'API.";
+                });
+        });
+    </script>
+</body>
+
+</html>
